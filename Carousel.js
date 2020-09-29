@@ -113,6 +113,15 @@ var Carousel = createReactClass({
     }
   },
 
+  goToPageWithoutAnimation(pageIndex){
+    // do not do anything if carousel is already moving
+    if (this.state.moving) return
+    if (pageIndex >= 0 && pageIndex < this.getChildrenLength()) {
+      this.setState({activePage: pageIndex})
+      this.refs.pager.scrollToPage(pageIndex, false)
+    }
+  },
+
   renderPageIndicator() {
     let childrenLength = this.getChildrenLength()
     if (this.props.hideIndicators === true || childrenLength <= 1) {
